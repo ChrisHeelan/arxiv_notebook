@@ -10,7 +10,7 @@ def test_notebook_to_arxiv(tmpdir):
 
     # Test case 1: Minimal inputs
     notebook_path = f"{temp_path}/test_notebook.ipynb"
-    name = 'output'
+    name = "output"
     output_path = f"{temp_path}/output"
     title = "Test Title"
     expected_tex_path = os.path.join(output_path, f"{name}.tex")
@@ -32,7 +32,7 @@ def test_notebook_to_arxiv(tmpdir):
     name = f"{temp_path}/output2"
 
     notebook_path = f"{temp_path}/test_notebook2.ipynb"
-    name = 'output2'
+    name = "output2"
     output_path = f"{temp_path}/output"
 
     title = "Test Title"
