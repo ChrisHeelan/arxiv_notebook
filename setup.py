@@ -6,7 +6,7 @@ import pathlib
 here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / "README.md").read_text(encoding="utf-8")
 
-INSTALL_REQUIRES = ["nbformat", "nbconvert", "ipylab"]
+INSTALL_REQUIRES = ["nbformat", "nbconvert", "ipylab", "pytest", "pytest-cov"]
 
 setup(
     name="arxiv_notebook",

@@ -1,3 +1,5 @@
 nbformat
 nbconvert
 ipylab
+pytest
+pytest-cov

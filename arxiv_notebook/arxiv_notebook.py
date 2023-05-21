@@ -104,6 +104,7 @@ def notebook_to_arxiv(
     header_center: Optional[str] = None,
     abstract: Optional[str] = None,
     save_notebook: bool = False,
+    output_path: str = "output",
     verbose: bool = False,
 ):
     """
@@ -124,6 +125,7 @@ def notebook_to_arxiv(
         header_center (str, optional): The text to be displayed in the center of the header. Defaults to None.
         abstract (str, optional): The abstract of the notebook. Defaults to None.
         save_notebook (bool, optional): Whether to save the notebook before conversion. Defaults to False.
+        output_path (str, optional): Where to write outputs. Defaults to "output".
         verbose (bool, optional): Whether to display verbose output during the conversion process. Defaults to False.
 
     Returns:
@@ -147,6 +149,8 @@ def notebook_to_arxiv(
 
         JupyterFrontEnd().commands.execute("docmanager:save")
         time.sleep(3)
+        JupyterFrontEnd().commands.execute("docmanager:save")
+        time.sleep(3)
 
     # Load the Jupyter notebook.
     with open(notebook_path, "r", encoding="utf-8") as f:
@@ -167,12 +171,12 @@ def notebook_to_arxiv(
     body = body.replace(r"\begin{document}", latex_insert)
 
     # If the output directory doesn't exist, create it.
-    if not os.path.isdir(name):
-        os.makedirs(name)
+    if not os.path.isdir(output_path):
+        os.makedirs(output_path)
 
     # Change working directory into the output_path.
     working_directory = os.getcwd()
-    os.chdir(name)
+    os.chdir(output_path)
 
     # Write the LaTeX style file.
     with open(f"arxiv.sty", "w", encoding="utf-8") as f:
@@ -184,9 +188,10 @@ def notebook_to_arxiv(
         f.write(body)
 
     # Write the resource outputs.
-    for output_key in resources["outputs"].keys():
-        with open(output_key, "wb") as f:
-            f.write(resources["outputs"][output_key])
+    if isinstance(resources["outputs"], dict):
+        for output_key in resources["outputs"].keys():
+            with open(output_key, "wb") as f:
+                f.write(resources["outputs"][output_key])
 
     # Convert the tex file to PDF.
     output = subprocess.check_output(
@@ -196,4 +201,5 @@ def notebook_to_arxiv(
     if verbose:
         print(output)
 
+    # Change back to original working directory.
     os.chdir(working_directory)
