@@ -2,6 +2,8 @@
 
 This Python module provides a convenient way to convert Jupyter notebooks to PDFs using an arXiv style based on NIPS 2018. It allows you to generate PDFs with a professional-looking format.
 
+This module uses the [arxiv-style](https://github.com/kourgeorge/arxiv-style) style from [kourgeorge](https://github.com/kourgeorge).
+
 ## Installation
 
 To use this package, you need to have Python 3 installed on your system. You can install the package using `pip` by running the following command:
