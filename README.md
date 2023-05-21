@@ -14,6 +14,8 @@ pip install https://github.com/ChrisHeelan/arxiv_notebook/archive/main.zip
 
 ## Usage
 
+For a complete example of the package, see the [example notebook](https://github.com/ChrisHeelan/arxiv_notebook/blob/main/example/example.ipynb).
+
 The package provides a function called `notebook_to_arxiv` that performs the conversion from a Jupyter notebook to a PDF using the arXiv style. Here is an example of how to use it:
 
 ```python
