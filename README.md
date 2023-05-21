@@ -1,6 +1,6 @@
 # arxiv_notebook
 
-This Python module provides a convenient way to convert Jupyter notebooks to PDFs using an arXiv style based on NIPS 2018. It allows you to generate PDFs with a professional-looking format suitable for submission to arXiv or other academic platforms.
+This Python module provides a convenient way to convert Jupyter notebooks to PDFs using an arXiv style based on NIPS 2018. It allows you to generate PDFs with a professional-looking format.
 
 ## Installation
 
