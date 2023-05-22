@@ -3,8 +3,8 @@ from typing import Optional, Sequence, Union
 import subprocess
 import nbformat
 from nbconvert.exporters import LatexExporter
-from nbconvert.preprocessors import Preprocessor
 from arxiv_notebook.style import ARXIV_STYLE
+from traitlets.config import Config
 
 
 def create_latex_insert(
@@ -105,6 +105,7 @@ def notebook_to_arxiv(
     abstract: Optional[str] = None,
     save_notebook: bool = False,
     output_path: str = "output",
+    config: Optional[Config] = None,
     verbose: bool = False,
 ):
     """
@@ -126,6 +127,9 @@ def notebook_to_arxiv(
         abstract (str, optional): The abstract of the notebook. Defaults to None.
         save_notebook (bool, optional): Whether to save the notebook before conversion. Defaults to False.
         output_path (str, optional): Where to write outputs. Defaults to "output".
+        config: (traitlets.config.Config, optional): User configuration instance passed to
+        nbconvert.exportersLatexExporter. See nbconvert documentation:
+        https://nbconvert.readthedocs.io/en/latest/nbconvert_library.html#Using-different-preprocessors.
         verbose (bool, optional): Whether to display verbose output during the conversion process. Defaults to False.
 
     Returns:
@@ -157,7 +161,7 @@ def notebook_to_arxiv(
         nb = nbformat.read(f, as_version=4)
 
     # Configure the LaTeX exporter.
-    exporter = LatexExporter()
+    exporter = LatexExporter(config=config)
 
     # Perform the conversion.
     (body, resources) = exporter.from_notebook_node(nb)

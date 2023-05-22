@@ -3,3 +3,4 @@ nbconvert
 ipylab
 pytest
 pytest-cov
+traitlets

@@ -61,6 +61,8 @@ In the above example, you need to provide the following parameters:
 - `header_center` (str, optional): The text to be displayed in the center of the header. By default, it is set to `None`.
 - `abstract` (str, optional): The abstract of the notebook. By default, it is set to `None`.
 - `save_notebook` (bool, optional): Whether to save the notebook before conversion. By default, it is set to `False`.
+- `output_path` (str, optional): Where to write outputs. Defaults to "output".
+- `config`: (traitlets.config.Config, optional): User configuration instance passed to nbconvert.exportersLatexExporter. See nbconvert documentation: https://nbconvert.readthedocs.io/en/latest/nbconvert_library.html#Using-different-preprocessors.
 - `verbose` (bool, optional): Whether to display verbose output during the conversion process. By default, it is set to `False`.
 
 After running the `notebook_to_arxiv` function, a directory with the specified `name` will be created, containing the generated PDF file and other necessary files.

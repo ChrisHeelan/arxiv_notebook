@@ -428,6 +428,7 @@
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{from} \PY{n+nn}{arxiv\PYZus{}notebook} \PY{k+kn}{import} \PY{n}{notebook\PYZus{}to\PYZus{}arxiv}
+\PY{k+kn}{from} \PY{n+nn}{traitlets}\PY{n+nn}{.}\PY{n+nn}{config} \PY{k+kn}{import} \PY{n}{Config}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -498,9 +499,11 @@ In this section we plot the sine waves.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} By default, notebook will be saved with input prompts included.}
 \PY{n}{notebook\PYZus{}to\PYZus{}arxiv}\PY{p}{(}
     \PY{n}{notebook\PYZus{}path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{example.ipynb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
-    \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{example}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{output\PYZus{}path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
     \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example arXiv Notebook}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
     \PY{n}{authors}\PY{o}{=}\PY{p}{[}
         \PY{p}{\PYZob{}}
@@ -520,6 +523,48 @@ In this section we plot the sine waves.
     \PY{n}{header\PYZus{}right}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example Report}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
     \PY{n}{header\PYZus{}center}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example for }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{texttt}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{arxiv}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{\PYZus{}notebook\PYZcb{} package}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
     \PY{n}{abstract}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{In this paper, we demonstrate using the }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{texttt}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{arxiv}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{\PYZus{}notebook\PYZcb{} package to convert a Jupyter notebook into a PDF using an arxiv LaTeX style.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{save\PYZus{}notebook}\PY{o}{=}\PY{k+kc}{True}
+\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Using the nbconvert Exporter config kwarg, we can control the configuration of the }
+\PY{c+c1}{\PYZsh{} utilized LatexExporter. This example shows excluding input prompts for a no\PYZhy{}code }
+\PY{c+c1}{\PYZsh{} version of the PDF.}
+
+\PY{n}{config} \PY{o}{=} \PY{n}{Config}\PY{p}{(}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Equivalent to jupyter nbconvert \PYZhy{}\PYZhy{}no\PYZhy{}input flag.}
+\PY{n}{config}\PY{o}{.}\PY{n}{TemplateExporter}\PY{o}{.}\PY{n}{exclude\PYZus{}output\PYZus{}prompt}\PY{o}{=}\PY{k+kc}{True}
+\PY{n}{config}\PY{o}{.}\PY{n}{TemplateExporter}\PY{o}{.}\PY{n}{exclude\PYZus{}input}\PY{o}{=}\PY{k+kc}{True}
+\PY{n}{config}\PY{o}{.}\PY{n}{TemplateExporter}\PY{o}{.}\PY{n}{exclude\PYZus{}input\PYZus{}prompt}\PY{o}{=}\PY{k+kc}{True}
+
+\PY{n}{notebook\PYZus{}to\PYZus{}arxiv}\PY{p}{(}
+    \PY{n}{notebook\PYZus{}path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{example.ipynb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{example\PYZus{}no\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{output\PYZus{}path}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output\PYZus{}no\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{config}\PY{o}{=}\PY{n}{config}\PY{p}{,}
+    \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example arXiv Notebook}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{authors}\PY{o}{=}\PY{p}{[}
+        \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{author 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first\PYZus{}line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{organization 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{second\PYZus{}line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{organization 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{email}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{email1@gmail.com}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}\PY{p}{,}
+        \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{author 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first\PYZus{}line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{organization 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{second\PYZus{}line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{organization 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{email}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{email2@gmail.com}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}\PY{p}{,}
+    \PY{p}{]}\PY{p}{,}
+    \PY{n}{under\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jupyter Notebook Report}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{header\PYZus{}right}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example Report}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{header\PYZus{}center}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example for }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{texttt}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{arxiv}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{\PYZus{}notebook\PYZcb{} package}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{abstract}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{In this paper, we demonstrate using the }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{texttt}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{arxiv}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{\PYZus{}notebook\PYZcb{} package to convert a Jupyter notebook into a PDF using an arxiv LaTeX style. This version uses the config kwarg to remove all input prompts in the PDF.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
     \PY{n}{save\PYZus{}notebook}\PY{o}{=}\PY{k+kc}{True}
 \PY{p}{)}
 \end{Verbatim}
